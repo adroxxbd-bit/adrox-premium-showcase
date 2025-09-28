@@ -67,13 +67,13 @@ const ServicesSection = () => {
             return (
               <div
                 key={index}
-                className={`service-card scale-in-delayed ${isVisible ? 'animate ' + service.delay : ''}`}
+                className={`service-card card-fade-in ${isVisible ? 'animate ' + service.delay : ''}`}
               >
-                <div className="mb-6">
+                <div className="mb-6 relative z-10">
                   <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                    <Icon className="w-8 h-8 text-primary icon-bounce" />
+                    <Icon className="w-8 h-8 text-primary service-icon" />
                   </div>
-                  <h3 className="text-2xl font-serif font-semibold text-foreground mb-4">
+                  <h3 className="text-2xl font-serif font-semibold text-foreground mb-4 service-title">
                     {service.title}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed font-sans">
