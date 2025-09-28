@@ -151,7 +151,7 @@
 
   /* Service card base styles */
   .service-card {
-    @apply bg-card rounded-xl p-8 relative overflow-hidden;
+    @apply bg-card rounded-lg p-6 relative overflow-hidden;
     box-shadow: var(--shadow-card);
     transform: translateY(0);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

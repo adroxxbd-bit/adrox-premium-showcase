@@ -22,16 +22,16 @@ const WhoWeAreSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className={`text-5xl md:text-6xl font-serif font-bold text-foreground mb-8 heading-underline ${isVisible ? 'animate-underline' : ''}`}>
+    <section ref={sectionRef} className="py-16 px-6">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className={`text-3xl md:text-4xl font-serif font-bold text-foreground mb-6 heading-underline ${isVisible ? 'animate-underline' : ''}`}>
             Who We Are?
           </h2>
         </div>
         
-        <div className={`max-w-4xl mx-auto transition-all duration-1000 ${isVisible ? 'fade-in-up' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed text-center font-sans">
+        <div className={`max-w-3xl mx-auto transition-all duration-1000 ${isVisible ? 'fade-in-up' : 'opacity-0 translate-y-8'}`}>
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-center font-sans">
             We are a creative design agency dedicated to helping brands look unique and professional. 
             From branding and identity to graphic design and social media content, we bring ideas to life 
             with designs that connect, inspire, and grow your business.

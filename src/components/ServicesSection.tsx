@@ -50,18 +50,18 @@ const ServicesSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <h2 className={`text-5xl md:text-6xl font-serif font-bold text-foreground mb-4 heading-underline ${isVisible ? 'animate-underline' : ''}`}>
+    <section ref={sectionRef} className="py-16 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className={`text-3xl md:text-4xl font-serif font-bold text-foreground mb-3 heading-underline ${isVisible ? 'animate-underline' : ''}`}>
             Our Services
           </h2>
-          <p className="text-xl text-muted-foreground font-sans">
+          <p className="text-lg text-muted-foreground font-sans">
             Comprehensive design solutions for your brand
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -69,14 +69,14 @@ const ServicesSection = () => {
                 key={index}
                 className={`service-card card-fade-in ${isVisible ? 'animate ' + service.delay : ''}`}
               >
-                <div className="mb-6 relative z-10">
-                  <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                    <Icon className="w-8 h-8 text-primary service-icon" />
+                <div className="mb-4 relative z-10">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                    <Icon className="w-6 h-6 text-primary service-icon" />
                   </div>
-                  <h3 className="text-2xl font-serif font-semibold text-foreground mb-4 service-title">
+                  <h3 className="text-xl font-serif font-semibold text-foreground mb-3 service-title">
                     {service.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed font-sans">
+                  <p className="text-muted-foreground leading-relaxed font-sans text-sm">
                     {service.description}
                   </p>
                 </div>
