@@ -25,10 +25,11 @@ const FooterSection = () => {
   return (
     <footer ref={sectionRef} className="py-20 px-6 border-t border-border/50">
       <div className="max-w-6xl mx-auto text-center">
-        <h3 className="text-3xl font-serif font-bold text-primary mb-4">ADROX</h3>
+        <h3 className="text-3xl font-serif font-bold text-primary mb-12">ADROX</h3>
         
-        <h4 className={`text-2xl md:text-3xl font-serif font-semibold text-foreground mb-8 max-w-3xl mx-auto leading-relaxed footer-headline ${isVisible ? 'animate' : ''}`}>
-          "Ready to bring your ideas to life? Let's design something amazing together."
+        <h4 className={`text-4xl md:text-5xl font-serif font-medium text-[#222] mb-12 max-w-4xl mx-auto leading-relaxed tracking-wide footer-headline ${isVisible ? 'animate' : ''}`}>
+          Ready to bring your ideas to life? Let's design{' '}
+          <span className="footer-accent">something amazing together</span>.
         </h4>
         
         <Button 

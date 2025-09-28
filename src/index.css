@@ -307,7 +307,7 @@
 
   /* Footer animations */
   .footer-headline {
-    @apply relative inline-block;
+    @apply relative;
     opacity: 0;
     transform: translateY(14px);
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -318,16 +318,21 @@
     transform: translateY(0);
   }
   
-  .footer-headline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 h-0.5 bg-primary;
-    width: 0;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  /* Orange accent text with underline */
+  .footer-accent {
+    @apply relative inline text-primary;
   }
   
-  .footer-headline.animate::after {
+  .footer-accent::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-0.5 bg-primary;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+  }
+  
+  .footer-headline.animate .footer-accent::after {
     transform: scaleX(1);
   }
   
