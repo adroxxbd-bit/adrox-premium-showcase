@@ -1,6 +1,7 @@
 import HeroSection from '@/components/HeroSection';
 import WhoWeAreSection from '@/components/WhoWeAreSection';
 import ServicesSection from '@/components/ServicesSection';
+import FooterSection from '@/components/FooterSection';
 
 const Index = () => {
   return (
@@ -15,14 +16,7 @@ const Index = () => {
       <ServicesSection />
       
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border/50">
-        <div className="max-w-6xl mx-auto text-center">
-          <h3 className="text-3xl font-serif font-bold text-primary mb-2">ADROX</h3>
-          <p className="text-muted-foreground font-sans">
-            Designs that speak louder
-          </p>
-        </div>
-      </footer>
+      <FooterSection />
     </div>
   );
 };
