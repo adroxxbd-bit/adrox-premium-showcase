@@ -2,41 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ADROX Design System - Premium beige & orange aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core brand colors - light beige & orange theme */
+    --background: 42 25% 96%;
+    --foreground: 25 15% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 42 30% 98%;
+    --card-foreground: 25 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 42 30% 98%;
+    --popover-foreground: 25 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Orange primary with warm tones */
+    --primary: 25 85% 55%;
+    --primary-foreground: 42 30% 98%;
+    --primary-glow: 25 85% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm secondary tones */
+    --secondary: 42 20% 92%;
+    --secondary-foreground: 25 15% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 42 15% 90%;
+    --muted-foreground: 25 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 25 75% 50%;
+    --accent-foreground: 42 30% 98%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 42 30% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 42 15% 88%;
+    --input: 42 15% 88%;
+    --ring: 25 85% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-background: linear-gradient(135deg, hsl(var(--background)), hsl(42 20% 94%));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--card)), hsl(42 25% 95%));
+
+    /* Shadows with orange glow */
+    --shadow-card: 0 4px 24px -2px hsl(var(--primary) / 0.08);
+    --shadow-card-hover: 0 8px 40px -4px hsl(var(--primary) / 0.15);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+
+    /* Animation timings */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Typography scale */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +121,141 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    background: var(--gradient-background);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  /* Animated underline for headings */
+  .heading-underline {
+    @apply relative inline-block;
+  }
+  
+  .heading-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-1 bg-primary;
+    width: 0;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .heading-underline.animate-underline::after {
+    width: 100%;
+  }
+
+  /* Service card base styles */
+  .service-card {
+    @apply bg-card rounded-xl p-8 transition-all duration-300;
+    box-shadow: var(--shadow-card);
+    transform: translateY(0);
+  }
+  
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Icon bounce animation */
+  .icon-bounce:hover {
+    animation: iconBounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* Button glow effect */
+  .btn-glow:hover {
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.05);
+  }
+
+  /* Page entrance animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .fade-in-up-delayed {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+  }
+
+  .scale-in-delayed {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .scale-in-delayed.animate {
+    animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Staggered card animations */
+  .card-1 { animation-delay: 0.1s; }
+  .card-2 { animation-delay: 0.2s; }
+  .card-3 { animation-delay: 0.3s; }
+  .card-4 { animation-delay: 0.4s; }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes iconBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .service-card:hover {
+    transform: none;
+  }
+  
+  .btn-glow:hover {
+    transform: none;
   }
 }
