@@ -133,6 +133,159 @@
 }
 
 @layer components {
+  /* Parallax background elements */
+  .parallax-orb {
+    @apply absolute rounded-full;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.1), transparent);
+    filter: blur(40px);
+  }
+
+  .parallax-orb-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 15%;
+    animation: driftSlow 25s ease-in-out infinite;
+  }
+
+  .parallax-orb-2 {
+    width: 200px;
+    height: 200px;
+    top: 70%;
+    right: 20%;
+    animation: driftSlow 30s ease-in-out infinite reverse;
+  }
+
+  .parallax-orb-3 {
+    width: 150px;
+    height: 150px;
+    top: 40%;
+    left: 70%;
+    animation: driftMedium 20s ease-in-out infinite;
+  }
+
+  .parallax-orb-4 {
+    width: 250px;
+    height: 250px;
+    bottom: 30%;
+    left: 10%;
+    animation: driftMedium 35s ease-in-out infinite reverse;
+  }
+
+  .parallax-orb-5 {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    right: 10%;
+    animation: driftFast 15s ease-in-out infinite;
+  }
+  /* Cinematic entrance animations */
+  .cinematic-fade-in {
+    animation: cinematicFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  .cinematic-fade-in-delayed {
+    animation: cinematicFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  }
+
+  /* Staggered text animations */
+  .staggered-text {
+    @apply inline-block;
+    animation: staggeredTextReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* 3D floating elements */
+  .floating-3d-element {
+    @apply absolute top-1/2 right-8 pointer-events-none;
+    transform-style: preserve-3d;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .cube-3d {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: floatingRotation 20s linear infinite;
+  }
+
+  .cube-face {
+    @apply absolute w-full h-full border border-primary/20;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--primary-glow) / 0.05));
+    backdrop-filter: blur(10px);
+  }
+
+  .cube-face.front { transform: rotateY(0deg) translateZ(50px); }
+  .cube-face.back { transform: rotateY(180deg) translateZ(50px); }
+  .cube-face.right { transform: rotateY(90deg) translateZ(50px); }
+  .cube-face.left { transform: rotateY(-90deg) translateZ(50px); }
+  .cube-face.top { transform: rotateX(90deg) translateZ(50px); }
+  .cube-face.bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+  /* Floating background shapes */
+  .floating-shapes {
+    @apply absolute inset-0 overflow-hidden;
+  }
+
+  .shape {
+    @apply absolute rounded-full;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--primary-glow) / 0.05));
+    backdrop-filter: blur(20px);
+  }
+
+  .shape-1 {
+    width: 200px;
+    height: 200px;
+    top: 20%;
+    left: 10%;
+    animation: floatingSlow 15s ease-in-out infinite;
+  }
+
+  .shape-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 15%;
+    animation: floatingSlow 20s ease-in-out infinite reverse;
+  }
+
+  .shape-3 {
+    width: 100px;
+    height: 100px;
+    bottom: 20%;
+    left: 20%;
+    animation: floatingSlow 18s ease-in-out infinite;
+  }
+
+  /* Cinematic button enhancements */
+  .cinematic-button {
+    @apply relative overflow-hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px hsl(var(--primary) / 0.2);
+  }
+
+  .cinematic-button::before {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(45deg, transparent, hsl(var(--primary) / 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+
+  .cinematic-button:hover::before {
+    transform: translateX(100%);
+  }
+
+  .cinematic-button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 12px 48px hsl(var(--primary) / 0.3);
+  }
+
+  .cinematic-button:active {
+    transform: translateY(-2px) scale(0.98);
+    transition: transform 0.1s;
+  }
+
   /* Animated underline for headings */
   .heading-underline {
     @apply relative inline-block;
@@ -142,60 +295,83 @@
     content: '';
     @apply absolute bottom-0 left-0 h-1 bg-primary;
     width: 0;
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
   .heading-underline.animate-underline::after {
     width: 100%;
   }
 
-  /* Service card base styles */
+  /* Service card base styles with cinematic enhancements */
   .service-card {
     @apply bg-card rounded-lg p-6 relative overflow-hidden;
     box-shadow: var(--shadow-card);
     transform: translateY(0);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--card)));
+    border: 1px solid hsl(var(--border) / 0.5);
   }
   
   .service-card::before {
     content: '';
     @apply absolute inset-0 opacity-0;
     background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--primary-glow) / 0.08));
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
+  }
+
+  .cinematic-card {
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
-  .service-card:hover {
-    transform: translateY(-12px);
-    box-shadow: var(--shadow-card-hover);
+  .cinematic-card:hover {
+    transform: translateY(-12px) translateZ(20px) rotateX(5deg) 
+               translateX(var(--mouse-x, 0)) translateY(var(--mouse-y, 0));
+    box-shadow: var(--shadow-card-hover), 0 20px 60px hsl(var(--primary) / 0.1);
   }
   
-  .service-card:hover::before {
+  .cinematic-card:hover::before {
     opacity: 1;
   }
   
-  /* Service card icon animation */
+  /* Service card icon animation with 3D effects */
+  .icon-container {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
+  }
+
   .service-card .service-icon {
-    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
-  .service-card:hover .service-icon {
-    transform: scale(1.15);
+  .cinematic-card:hover .icon-container {
+    transform: translateZ(10px) rotateY(15deg);
+  }
+
+  .cinematic-card:hover .service-icon {
+    transform: scale(1.2) rotateZ(5deg);
+    filter: drop-shadow(0 4px 8px hsl(var(--primary) / 0.3));
   }
   
-  /* Service title underline animation */
+  /* Service title underline animation with cinematic timing */
   .service-title {
     @apply relative inline-block;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
   .service-title::after {
     content: '';
     @apply absolute bottom-0 left-0 h-0.5 bg-primary;
     width: 0;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.5);
   }
   
-  .service-card:hover .service-title::after {
+  .cinematic-card:hover .service-title {
+    transform: translateZ(5px);
+  }
+
+  .cinematic-card:hover .service-title::after {
     width: 100%;
   }
 
@@ -250,16 +426,17 @@
     transition-delay: 0.4s;
   }
   
-  /* Enhanced scale-in animation for cards */
+  /* Enhanced scale-in animation for cards with cinematic flair */
   .card-fade-in {
     opacity: 0;
-    transform: translateY(40px) scale(0.95);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(60px) scale(0.9) rotateX(15deg);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
   }
   
   .card-fade-in.animate {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1) rotateX(0deg);
   }
 }
 
@@ -281,7 +458,63 @@
   }
 }
 
-/* Keyframe animations */
+/* Cinematic keyframe animations */
+@keyframes cinematicFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes staggeredTextReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) rotateX(30deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes floatingRotation {
+  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  33% { transform: rotateX(30deg) rotateY(120deg) rotateZ(60deg); }
+  66% { transform: rotateX(-15deg) rotateY(240deg) rotateZ(120deg); }
+  100% { transform: rotateX(0deg) rotateY(360deg) rotateZ(180deg); }
+}
+
+@keyframes floatingSlow {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-20px) translateX(10px); }
+  50% { transform: translateY(-10px) translateX(-15px); }
+  75% { transform: translateY(-30px) translateX(5px); }
+}
+
+@keyframes driftSlow {
+  0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+  25% { transform: translateY(-40px) translateX(20px) scale(1.1); }
+  50% { transform: translateY(-20px) translateX(-30px) scale(0.9); }
+  75% { transform: translateY(-60px) translateX(10px) scale(1.05); }
+}
+
+@keyframes driftMedium {
+  0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+  33% { transform: translateY(-30px) translateX(25px) scale(1.15); }
+  66% { transform: translateY(-45px) translateX(-20px) scale(0.85); }
+}
+
+@keyframes driftFast {
+  0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+  50% { transform: translateY(-50px) translateX(30px) scale(1.2); }
+}
+
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -376,7 +609,7 @@
   }
 }
 
-/* Reduced motion preferences */
+/* Reduced motion preferences - respect accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -384,19 +617,28 @@
     transition-duration: 0.01ms !important;
   }
   
-  .service-card:hover {
+  .cinematic-card:hover {
     transform: translateY(-4px);
   }
   
-  .service-card .service-icon {
+  .service-card .service-icon,
+  .icon-container {
     transition: none;
   }
   
-  .service-card:hover .service-icon {
+  .cinematic-card:hover .service-icon,
+  .cinematic-card:hover .icon-container {
     transform: none;
   }
   
-  .btn-glow:hover {
+  .cinematic-button:hover {
+    transform: none;
+  }
+
+  .floating-3d-element,
+  .cube-3d,
+  .floating-shapes .shape {
+    animation: none;
     transform: none;
   }
 }

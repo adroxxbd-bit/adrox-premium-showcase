@@ -30,6 +30,7 @@ const services = [
 
 const ServicesSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -46,7 +47,16 @@ const ServicesSection = () => {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   return (
@@ -67,10 +77,21 @@ const ServicesSection = () => {
             return (
               <div
                 key={index}
-                className={`service-card card-fade-in ${isVisible ? 'animate ' + service.delay : ''}`}
+                className={`service-card card-fade-in cinematic-card ${isVisible ? 'animate ' + service.delay : ''}`}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left - rect.width / 2;
+                  const y = e.clientY - rect.top - rect.height / 2;
+                  e.currentTarget.style.setProperty('--mouse-x', `${x * 0.1}px`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${y * 0.1}px`);
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.setProperty('--mouse-x', '0px');
+                  e.currentTarget.style.setProperty('--mouse-y', '0px');
+                }}
               >
                 <div className="mb-4 relative z-10">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3 icon-container">
                     <Icon className="w-6 h-6 text-primary service-icon" />
                   </div>
                   <h3 className="text-xl font-serif font-semibold text-foreground mb-3 service-title">
