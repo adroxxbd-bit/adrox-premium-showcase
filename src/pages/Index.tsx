@@ -1,24 +1,25 @@
-import HeroSection from '@/components/HeroSection';
-import WhoWeAreSection from '@/components/WhoWeAreSection';
-import ServicesSection from '@/components/ServicesSection';
-import FooterSection from '@/components/FooterSection';
-import ParallaxBackground from '@/components/ParallaxBackground';
+import CinematicHero from '@/components/CinematicHero';
+import CinematicWhoWeAre from '@/components/CinematicWhoWeAre';
+import CinematicServices from '@/components/CinematicServices';
+import CinematicFooter from '@/components/CinematicFooter';
+import CinematicEffects from '@/components/CinematicEffects';
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative">
-      <ParallaxBackground />
+    <div className="min-h-screen relative overflow-hidden">
+      <CinematicEffects />
+      
       {/* Hero Section */}
-      <HeroSection />
+      <CinematicHero />
       
       {/* Who We Are Section */}
-      <WhoWeAreSection />
+      <CinematicWhoWeAre />
       
       {/* Services Section */}
-      <ServicesSection />
+      <CinematicServices />
       
       {/* Footer */}
-      <FooterSection />
+      <CinematicFooter />
     </div>
   );
 };
