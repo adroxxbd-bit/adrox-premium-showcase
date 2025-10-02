@@ -112,6 +112,39 @@
 }
 
 @layer components {
+  /* === CUSTOM CURSOR === */
+  .custom-cursor {
+    @apply fixed pointer-events-none z-50;
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+    opacity: 0.8;
+  }
+
+  .custom-cursor-dot {
+    @apply fixed pointer-events-none z-50;
+    width: 24px;
+    height: 24px;
+    border: 2px solid hsl(var(--primary) / 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .custom-cursor-dot.hovering {
+    width: 40px;
+    height: 40px;
+    border-color: hsl(var(--primary) / 0.5);
+    background: hsl(var(--primary) / 0.05);
+  }
+
+  .custom-cursor-dot.clicking {
+    animation: cursorRipple 0.6s ease-out;
+  }
+
   /* === SCROLL PROGRESS BAR === */
   .scroll-progress-bar {
     @apply fixed top-0 left-0 w-full h-1 z-50;
@@ -137,11 +170,11 @@
   .hero-title {
     @apply text-4xl md:text-6xl font-serif font-bold text-foreground mb-6;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) scale(0.95);
   }
 
   .hero-title.animate {
-    animation: fadeUp 0.8s ease-out forwards;
+    animation: fadeUpScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
   .hero-subtitle {
@@ -164,16 +197,30 @@
   }
 
   .hero-button {
-    @apply px-8 py-4 text-base font-medium rounded-full;
+    @apply px-8 py-4 text-base font-medium rounded-full relative overflow-hidden;
     background: var(--gradient-primary);
     color: hsl(var(--primary-foreground));
     box-shadow: var(--shadow-card);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-button::before {
+    content: '';
+    @apply absolute inset-0 bg-white opacity-0;
+    transition: opacity 0.3s ease;
   }
 
   .hero-button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-card-hover), 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  .hero-button:hover::before {
+    opacity: 0.1;
+  }
+
+  .hero-button:active {
+    transform: translateY(-1px) scale(0.98);
   }
 
   /* === WHO WE ARE SECTION === */
@@ -193,8 +240,9 @@
 
   .section-title::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-1 bg-primary;
-    transition: width 0.8s ease 0.3s;
+    @apply absolute -bottom-2 left-0 w-0 h-1 bg-primary;
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.4);
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
   }
 
   .section-title.animate {
@@ -239,20 +287,24 @@
   }
 
   .service-card {
-    @apply p-8 rounded-2xl bg-card border border-border/50;
+    @apply p-8 rounded-2xl bg-card border border-border/50 cursor-pointer;
     box-shadow: var(--shadow-card);
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.3s ease;
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .service-card.animate {
-    animation: fadeUp 0.8s ease-out forwards;
+    animation: fadeUpScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
   .service-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-8px) scale(1.02);
     box-shadow: var(--shadow-card-hover);
+  }
+
+  .service-card:active {
+    transform: translateY(-6px) scale(0.98);
   }
 
   .service-icon-wrapper {
@@ -321,16 +373,30 @@
   }
 
   .footer-button {
-    @apply px-8 py-4 text-base font-medium rounded-full;
+    @apply px-8 py-4 text-base font-medium rounded-full relative overflow-hidden;
     background: var(--gradient-primary);
     color: hsl(var(--primary-foreground));
     box-shadow: var(--shadow-card);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .footer-button::before {
+    content: '';
+    @apply absolute inset-0 bg-white opacity-0;
+    transition: opacity 0.3s ease;
   }
 
   .footer-button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-card-hover), 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  .footer-button:hover::before {
+    opacity: 0.1;
+  }
+
+  .footer-button:active {
+    transform: translateY(-1px) scale(0.98);
   }
 }
 
@@ -357,6 +423,42 @@
   }
 }
 
+@keyframes fadeUpScale {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cursorRipple {
+  0% {
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+  }
+  100% {
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+@keyframes wordReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -365,5 +467,10 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .custom-cursor,
+  .custom-cursor-dot {
+    display: none !important;
   }
 }
