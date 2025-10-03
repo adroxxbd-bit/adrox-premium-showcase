@@ -99,6 +99,11 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     background: var(--gradient-background);

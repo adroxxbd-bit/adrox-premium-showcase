@@ -21,7 +21,16 @@ const CinematicHero = () => {
         </p>
         
         <div className={`hero-button-wrapper ${isLoaded ? 'animate' : ''}`}>
-          <Button size="lg" className="hero-button">
+          <Button 
+            size="lg" 
+            className="hero-button"
+            onClick={() => {
+              document.getElementById('services-section')?.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }}
+          >
             About us
           </Button>
         </div>

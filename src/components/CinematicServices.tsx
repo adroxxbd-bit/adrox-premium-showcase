@@ -50,7 +50,7 @@ const CinematicServices = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="services-section">
+    <section id="services-section" ref={sectionRef} className="services-section">
       <div className="services-content">
         <h2 className={`section-title ${isVisible ? 'animate' : ''}`}>Our Services</h2>
         <p className={`section-subtitle ${isVisible ? 'animate' : ''}`}>
