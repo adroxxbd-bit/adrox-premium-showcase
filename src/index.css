@@ -104,6 +104,12 @@
     scroll-padding-top: 2rem;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     background: var(--gradient-background);

@@ -25,13 +25,17 @@ const CinematicHero = () => {
             size="lg" 
             className="hero-button"
             onClick={() => {
-              document.getElementById('services-section')?.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-              });
+              const element = document.getElementById('services-section');
+              if (element) {
+                const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - 100;
+                window.scrollTo({
+                  top: targetPosition,
+                  behavior: 'smooth'
+                });
+              }
             }}
           >
-            About us
+            Services
           </Button>
         </div>
       </div>
