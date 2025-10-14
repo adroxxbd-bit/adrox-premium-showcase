@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 
 const CinematicFooter = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -32,7 +33,15 @@ const CinematicFooter = () => {
         </h4>
         
         <div className={`footer-button-wrapper ${isVisible ? 'animate' : ''}`}>
-          <Button size="lg" className="footer-button">
+          <Button 
+            size="lg" 
+            className={`footer-button ${isClicked ? 'button-click-animation' : ''}`}
+            onClick={() => {
+              setIsClicked(true);
+              setTimeout(() => setIsClicked(false), 300);
+              window.open('https://wa.me/8801886327955', '_blank');
+            }}
+          >
             Let's Talk
           </Button>
         </div>
