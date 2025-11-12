@@ -3,14 +3,26 @@ import { Button } from '@/components/ui/button';
 
 const CinematicHero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section className="hero-section">
+    <section className="hero-section" style={{
+      transform: `translateY(${scrollY * 0.3}px)`,
+      transition: 'transform 0.1s ease-out'
+    }}>
       <div className="hero-content">
         <h1 className={`hero-title ${isLoaded ? 'animate' : ''}`}>
           Designs That <span className="text-primary">Speak Louder</span>

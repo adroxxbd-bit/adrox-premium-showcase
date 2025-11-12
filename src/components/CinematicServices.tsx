@@ -30,6 +30,7 @@ const services = [
 
 const CinematicServices = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -49,8 +50,24 @@ const CinematicServices = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight));
+        setScrollY(scrollProgress);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section id="services-section" ref={sectionRef} className="services-section">
+    <section id="services-section" ref={sectionRef} className="services-section" style={{
+      transform: `translateY(${(1 - scrollY) * 40}px)`,
+      transition: 'transform 0.1s ease-out'
+    }}>
       <div className="services-content">
         <h2 className={`section-title ${isVisible ? 'animate' : ''}`}>Our Services</h2>
         <p className={`section-subtitle ${isVisible ? 'animate' : ''}`}>

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 const CinematicFooter = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -23,8 +24,24 @@ const CinematicFooter = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight));
+        setScrollY(scrollProgress);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <footer ref={sectionRef} className="footer-section">
+    <footer ref={sectionRef} className="footer-section" style={{
+      transform: `translateY(${(1 - scrollY) * 30}px)`,
+      transition: 'transform 0.1s ease-out'
+    }}>
       <div className="footer-content">
         <h3 className={`footer-brand ${isVisible ? 'animate' : ''}`}>ADROX</h3>
         

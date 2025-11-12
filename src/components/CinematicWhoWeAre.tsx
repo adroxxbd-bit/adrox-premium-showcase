@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const CinematicWhoWeAre = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -21,11 +22,27 @@ const CinematicWhoWeAre = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight));
+        setScrollY(scrollProgress);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const text = "We are a creative design agency dedicated to helping brands look unique and professional. From branding and identity to graphic design and social media content, we bring ideas to life with designs that connect, inspire, and grow your business.";
   const words = text.split(' ');
 
   return (
-    <section ref={sectionRef} className="who-we-are-section">
+    <section ref={sectionRef} className="who-we-are-section" style={{
+      transform: `translateY(${(1 - scrollY) * 30}px)`,
+      transition: 'transform 0.1s ease-out'
+    }}>
       <div className="who-we-are-content">
         <h2 className={`section-title ${isVisible ? 'animate' : ''}`}>
           Who We Are?
